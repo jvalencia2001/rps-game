@@ -2,9 +2,12 @@ const resultDisplay = document.querySelector('#result')
 const choicesDisplay = document.querySelector('#choices-btn')
 const choices = ['Rock', 'Paper', 'Scissors']
 
+const buttons = document.getElementsByTagName("button")
+
 var winner
 let score = [0, 0]
 let gameOver = 0;
+
 
 const handleClick = (btn) => {
   if(!gameOver)
@@ -33,13 +36,10 @@ const handleClick = (btn) => {
 
 }
 
-choices.forEach(choice => {
-  const btn = document.createElement('button')
-  btn.innerHTML = choice
-  btn.className += 'choice-btn'
+for(const btn of buttons) {
   btn.addEventListener('click', handleClick)
-  choicesDisplay.appendChild(btn)
-})
+}
+
 
 const getResults = (userChoice, computerChoice) => {
   switch (userChoice + computerChoice) {
