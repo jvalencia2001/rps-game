@@ -4,9 +4,11 @@ const choices = ['Rock', 'Paper', 'Scissors']
 
 var winner
 let score = [0, 0]
+let gameOver = 0;
 
 const handleClick = (btn) => {
-  getResults(btn.target.innerHTML, choices[Math.floor(Math.random() * choices.length)])
+  if(!gameOver)
+    getResults(btn.target.innerHTML, choices[Math.floor(Math.random() * choices.length)])
   
   switch(winner) {
     case 0: 
@@ -19,11 +21,8 @@ const handleClick = (btn) => {
       break;
   }
   
-  if(score[0] == 5 || score[1] == 5) {
-    const btns = document.getElementsByClassName('choice-btn')
-    for(const btn of btns)
-      btn.style.display = 'none'
-
+  if((score[0] >= 5 || score[1] >= 5) && !gameOver) {
+    gameOver = 1;
     if(score[0] == 5) 
       resultDisplay.innerHTML = 'You beat the computer'
     else
